@@ -3,12 +3,13 @@ import numpy as np
 import librosa
 #import librosa.display
 # from IPython.display import display, Image
-
+import serial
 import sounddevice as sd
 import numpy as np
 from scipy.io.wavfile import write
 import tempfile
 import os
+import sys
 
 #library for arduino connectivity
 import serial.tools.list_ports
@@ -57,9 +58,9 @@ def identify_sound(audio_file):
     cooker = 3305.3466796875 or 2314.8193359375
     
     if frequency in mobile:
-        return "mobile ringtone"
+        return "mobile_ringtone"
     elif frequency in alarm:
-        return "alarm sound"
+        return "alarm_sound"
     elif frequency in doorbell:
         return "doorbell"
     elif frequency in beep:
@@ -70,9 +71,9 @@ def identify_sound(audio_file):
         return "cooker whistle"
     return "Unknown Sound"
 
-audio_file = record_audio(duration=10)
-result = identify_sound(audio_file)
-print("Identified Sound:", result)
+# audio_file = record_audio(duration=10)
+# result = identify_sound(audio_file)
+# print("Identified Sound:", result)
 
 '''---- Arduino connectivity part------------'''
 
@@ -98,12 +99,15 @@ serialInst.baudrate = 9600
 serialInst.port = use
 serialInst.open()
 
-while True:
-    # command = input("Arduino command ON/OFF/exit : ")
-    command = result
-    serialInst.write(command.encode('utf-8'))
-    
-    if command == 'exit' :
-        exit()
+try:
 
+    while True:
+        audio_file = record_audio(duration=10)
+        result = identify_sound(audio_file)
+        print("Identified Sound:", result)
+        serialInst.write(result.encode('utf-8'))
 
+except KeyboardInterrupt:
+    print("\n Exiting !!!!!")
+    serialInst.close()
+    sys.exit()
