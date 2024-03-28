@@ -1,8 +1,8 @@
-# import IPython.display as ipd
+import IPython.display as ipd
 import numpy as np
 import librosa
-#import librosa.display
-# from IPython.display import display, Image
+import librosa.display
+from IPython.display import display, Image
 
 import sounddevice as sd
 import numpy as np
@@ -67,23 +67,26 @@ def identify_sound(audio_file):
         return "cooker whistle"
     return "Unknown Sound"
 
-audio_file = record_audio(duration=10)
-result = identify_sound(audio_file)
+# audio_file = record_audio(duration=10)
+# result = identify_sound(audio_file)
+result = "mobile ringtone"
 print("Identified Sound:", result)
 
-# if result == "mobile ringtone":
-#     image_path = "UrbanSound/mobile_ringtone.png"
-#     display(Image(filename=image_path))
-# elif result == "alarm sound":
-#     image_path = "UrbanSound/alarm.png"
-#     display(Image(filename=image_path))
-# elif result ==  "doorbell":
-#     image_path = "UrbanSound/doorbell1.png"
-#     display(Image(filename=image_path))
-# elif result == "beep sound":
-#     image_path = "UrbanSound/beep.png"
-#     display(Image(filename=image_path))
-# elif result == "dog barking":
-#     image_path = "UrbanSound/dog_barking.png"
-#     display(Image(filename=image_path))
+
+
+if result == "mobile ringtone":
+    image_path = "UrbanSound/mobile_ringtone.png"
+    display(Image(filename=image_path))
+elif result == "alarm sound":
+    image_path = "UrbanSound/alarm.png"
+    display(Image(filename=image_path))
+elif result ==  "doorbell":
+    image_path = "UrbanSound/doorbell1.png"
+    display(Image(filename=image_path))
+elif result == "beep sound":
+    image_path = "UrbanSound/beep.png"
+    display(Image(filename=image_path))
+elif result == "dog barking":
+    image_path = "UrbanSound/dog_barking.png"
+    display(Image(filename=image_path))
 

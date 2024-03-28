@@ -1,8 +1,8 @@
-# import IPython.display as ipd
+import IPython.display as ipd
 import numpy as np
 import librosa
-#import librosa.display
-# from IPython.display import display, Image
+import librosa.display
+from IPython.display import display, Image
 import serial
 import sounddevice as sd
 import numpy as np
@@ -64,11 +64,8 @@ def identify_sound(audio_file):
     elif frequency in doorbell:
         return "doorbell"
     elif frequency in beep:
-        return "beep sound"
-    elif frequency in dog:
-        return "dog barking"
-    elif cooker==frequency:
-        return "cooker whistle"
+        return "beep_sound"
+    
     return "Unknown Sound"
 
 # audio_file = record_audio(duration=10)
